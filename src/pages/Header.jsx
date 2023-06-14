@@ -14,13 +14,13 @@ export default function Header() {
       <div className="bg-mainr h-10 pl-[20vw] pr-[10vw] flex justify-between items-center">
         <p className="text-mainc text-xs">คุณยังไม่ได้เข้าสู่ระบบ</p>
         <div className="flex gap-5">
-          <Link to="#" className="text-mainc text-sm">
+          <Link to="/brewery" className="text-mainc text-sm">
             ผู้ผลิต
           </Link>
-          <Link to="#" className="text-mainc text-sm">
+          <Link to="/beer" className="text-mainc text-sm">
             แหล่งรวมเบียร์
           </Link>
-          <Link to="#" className="text-mainc text-sm">
+          <Link to="/aboutme" className="text-mainc text-sm">
             เกี่ยวกับฉัน
           </Link>
         </div>
@@ -28,9 +28,9 @@ export default function Header() {
 
       <div className="bg-mainb h-14 pl-[20vw] pr-[10vw] flex justify-between items-center shadow-xl">
         <div className="flex justify-around gap-3">
-            <RowIcon className="w-5 h-5"/>
+            {/* <RowIcon className="w-5 h-5"/>
             <p className="text-mainc text-xs">ประเภทเบียร์</p>
-            <DropIcon className="w-5 h-5"/>
+            <DropIcon className="w-5 h-5"/> */}
         </div>
         <div className="flex justify-center items-center gap-4">
             <UserIcon className="w-7 h-7 pb-1"/>

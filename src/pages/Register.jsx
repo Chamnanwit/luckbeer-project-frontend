@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { register } from "../api/register-api";
+import { register } from "../api/auth-api";
 
 export default function Login() {
   const [input, setInput] = useState({

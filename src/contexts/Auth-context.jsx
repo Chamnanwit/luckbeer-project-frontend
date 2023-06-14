@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { getMe } from "../api/register-api";
+import { getMe } from "../api/auth-api";
+import { getAllBeer, getBeerById } from "../api/beer-api";
 
 const AuthContext = createContext();
 
@@ -23,8 +24,28 @@ export default function AuthContextProvider(props) {
     setUser(null);
   };
 
+  //  beer
+
+  const [beer, setBeer] = useState([]);
+
+  const fetchBeer = async () => {
+    const res = await getAllBeer();
+    console.log(res)
+    setBeer(res.data);
+  };
+
+
+  const [beerById, setBeerById] = useState([]);
+
+  const fetchBeerById = async (id) => {
+    const res = await getBeerById(id);
+    setBeerById(res.data);
+    // console.log(res.data)
+  };
+
+
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider value={{ user, setUser, logout, beer, fetchBeer, beerById, fetchBeerById }}>
       {props.children}
     </AuthContext.Provider>
   );

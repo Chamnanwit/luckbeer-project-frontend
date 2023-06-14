@@ -11,9 +11,9 @@ export default function Footer() {
             </div>
             <div className="flex gap-4 justify-center py-1">
                 <Link to='/' className="text-mainc text-sm">หน้าแรก</Link>
-                <Link to='#' className="text-mainc text-sm">ผู้ผลิต</Link>
-                <Link to='#' className="text-mainc text-sm">แหล่งรวมเบียร์</Link>
-                <Link to='#' className="text-mainc text-sm">เกี่ยวกับฉัน</Link>
+                <Link to='/brewery' className="text-mainc text-sm">ผู้ผลิต</Link>
+                <Link to='/beer' className="text-mainc text-sm">แหล่งรวมเบียร์</Link>
+                <Link to='/aboutme' className="text-mainc text-sm">เกี่ยวกับฉัน</Link>
             </div>
             <div className="flex justify-center gap-6 py-3">
                 <FaceIcon className="w-6 h-6"/>

@@ -1,7 +1,7 @@
 import { FaceIcon } from "../icons";
 import { useAuth } from "../contexts/Auth-context";
 import { useState } from "react";
-import { login, getMe } from "../api/register-api";
+import { login, getMe } from "../api/auth-api";
 
 export default function Login() {
   const { user, setUser } = useAuth();
