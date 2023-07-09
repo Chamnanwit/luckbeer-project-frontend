@@ -2,8 +2,10 @@ import { FaceIcon } from "../icons";
 import { useAuth } from "../contexts/Auth-context";
 import { useState } from "react";
 import { login, getMe } from "../api/auth-api";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const { user, setUser } = useAuth();
 
   const [input, setInput] = useState({
@@ -26,6 +28,7 @@ export default function Login() {
       const rs2 = await getMe(token);
       // console.log(rs2)
       setUser(rs2.data.user);
+      navigate("/")
     } catch (err) {
       alert(err.response?.data?.error || err.message);
     }
@@ -33,7 +36,7 @@ export default function Login() {
   // console.log(user);
   return (
     <div className="flex justify-around py-[8vh]">
-      <form className="w-[20vw]" onSubmit={hdlSubmit}>
+      <form className="w-[20vw]" onSubmit={hdlSubmit} >
         <h1 className="text-xl font-semibold py-4">เข้าสู่ระบบ</h1>
 
         <div className="py-3">

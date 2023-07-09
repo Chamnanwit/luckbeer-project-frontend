@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { register } from "../api/auth-api";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
     name: "",
@@ -28,6 +31,7 @@ export default function Login() {
       });
       console.log({email, name, password, confirmPassword})
       alert("สมัครสมาชิกสำเร็จ");
+      navigate("/login")
     } catch (err) {
       console.log(err);
     }
@@ -114,10 +118,12 @@ export default function Login() {
 
       <div className="flex flex-row justify-center">
         <p className="text-xs">เป็นสมาชิกอยู่แล้ว ? </p>
-        <a className="underline underline-offset-4 text-xs px-2">
+        <Link to="/login">
+        <button className="underline underline-offset-4 text-xs px-2" type="button">
           {" "}
           เข้าสู่ระบบ
-        </a>
+        </button>
+        </Link>
       </div>
     </div>
   );

@@ -4,8 +4,8 @@ export const addCommentBeer = (beerId, input) => {
   return axios.post(`/beer/${beerId}/comment`, input);
 };
 
-export const updateCommentByCommentId = (beerId, commentId) => {
-  return axios.patch(`/beer/${beerId}/comment/${commentId}`);
+export const updateCommentByCommentId = (beerId, commentId, input) => {
+  return axios.patch(`/beer/${beerId}/comment/${commentId}`, input);
 };
 
 export const deleteCommentByCommentIdByAdmin = (beerId, commentId) => {
@@ -18,4 +18,4 @@ export const deleteCommentByCommentIdByUser = (beerId, commentId) => {
 
 export const getCommentBeer = (beerId) => {
   return axios.get(`/beer/${beerId}/comment`);
-}
+};

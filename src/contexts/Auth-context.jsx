@@ -40,7 +40,7 @@ export default function AuthContextProvider(props) {
   const fetchBeerById = async (id) => {
     const res = await getBeerById(id);
     setBeerById(res.data);
-    // console.log(res.data)
+    console.log(res.data)
   };
 
 
