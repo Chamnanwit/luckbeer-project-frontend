@@ -9,6 +9,8 @@ export default function BeerCard() {
   const [input, setInput] = useState("");
   const [brewery, setBrewery] = useState([]);
 
+  console.log("--------------brew-------------", brewery)
+
 
   const fetchBrewery = async () => {
     const res = await getAllBrewery();
@@ -26,7 +28,7 @@ export default function BeerCard() {
   const hdlSubmit = (e) => {
     e.preventDefault();
 
-    addBeer(input);
+    // addBeer(input);
   };
 
   return (
@@ -66,7 +68,7 @@ export default function BeerCard() {
               <Link to={`/brewery/${el.id}`}>
               <Brewery
                 key={id}
-                // logo={el?.Images[0]}
+                logo={el?.Images}
                 name={el.name}
                 province={el.province}
                 phoneNumber={el.phoneNumber}
@@ -76,7 +78,7 @@ export default function BeerCard() {
             );
           })}
         </div>
-        <div className="flex justify-around mx-4 mt-8">
+        {/* <div className="flex justify-around mx-4 mt-8">
         {brewery.map((el, id) => {
             return (
               <Brewery
@@ -89,7 +91,7 @@ export default function BeerCard() {
               />
             );
           })}
-        </div>
+        </div> */}
       </div>
     </div>
   );
