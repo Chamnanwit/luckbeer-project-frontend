@@ -33,7 +33,7 @@ export default function Router() {
                 { path: '/beer' , element: <BeerCard />},
                 { path: '/brewery' , element: <BreweryCard />},
                 { path: '/beer/:beerId' , element: <BeerData />},
-                { path: '/brewery/1' , element: <BreweryData />},
+                { path: '/brewery/:breweryId' , element: <BreweryData />},
                 { path: '/addbeer' , element: <AddBeer />},
                 { path: '/addbrewery' , element: <AddBrewery />},
                 { path: '/aboutme' , element: <AboutMe />},

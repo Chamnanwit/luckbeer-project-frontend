@@ -7,6 +7,7 @@ import cover4 from "../assets/cover4.jpg";
 import { useEffect, useState } from "react";
 import { getAllBeer, getBeerById } from "../api/beer-api";
 import { getAllBrewery, getBreweryById } from "../api/brewery-api";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [beer, setBeer] = useState([]);
@@ -107,6 +108,7 @@ export default function Home() {
         <div className="flex justify-around">
           {beer.map((el, id) => {
             return (
+              <Link to={`/beer/${el.id}`}>
               <Beer
               key={id}
               percentAlcohol={el.percentAlcohol}
@@ -114,6 +116,7 @@ export default function Home() {
               image={el.ImageBeer.image1}
               getBeerDataById={getBeerDataById}
               />
+              </Link>
             )
           })}
           
