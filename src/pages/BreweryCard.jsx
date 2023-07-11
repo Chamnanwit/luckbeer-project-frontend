@@ -9,7 +9,7 @@ export default function BeerCard() {
   const [input, setInput] = useState("");
   const [brewery, setBrewery] = useState([]);
 
-  console.log("--------------brew-------------", brewery)
+  // console.log("--------------brew-------------", brewery)
 
 
   const fetchBrewery = async () => {
@@ -62,7 +62,7 @@ export default function BeerCard() {
 
       {/* card */}
       <div>
-        <div className="flex justify-around mx-4 mt-8">
+        <div className="flex justify-around mx-4 mt-8 gap-10 flex-wrap">
         {brewery.map((el, id) => {
             return (
               <Link to={`/brewery/${el.id}`}>

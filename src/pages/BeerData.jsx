@@ -10,9 +10,8 @@ import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/Auth-context";
 import Comment from "../component/Comment";
 
-
 export default function BeerData() {
-  const { beerById, fetchBeerById } = useAuth();
+  const { beerById, fetchBeerById, user } = useAuth();
   const [comment, setComment] = useState([]);
   const [input, setInput] = useState({ text: "" });
   const { beerId } = useParams();
@@ -22,7 +21,7 @@ export default function BeerData() {
 
   const fetchComment = async (beerId) => {
     const res = await getCommentBeer(beerId);
-   
+
     setComment(res.data);
   };
   useEffect(() => {
@@ -41,8 +40,8 @@ export default function BeerData() {
   const hdlSubmit = async (e) => {
     e.preventDefault();
     if (!isEdit) {
-     await addCommentBeer(beerId, { message: input });
-     await fetchComment(beerId);
+      await addCommentBeer(beerId, { message: input });
+      await fetchComment(beerId);
     } else {
       await handleSubmitEditComment();
       await fetchComment(beerId);
@@ -52,9 +51,9 @@ export default function BeerData() {
   };
 
   const handleClickAdd = () => {
-    setIsEdit(false)
+    setIsEdit(false);
     setBoxComment(!boxComment);
-  }
+  };
 
   const hdlClickEdit = (commentId) => {
     setIsEdit(true);
@@ -82,10 +81,14 @@ export default function BeerData() {
 
       {/* body */}
       <div className="flex justify-around items-center w-[90vw] mx-auto pt-4">
-        <div className="flex flex-col w-[35%]">
-          <Link to="/addbeer">
-          <SetIcon className={"w-2"} />
-          </Link>
+        <div className="flex flex-col w-[35%] gap-6">
+          {user?.isAdmin ? (
+            <Link to="/addbeer">
+              <SetIcon className={"w-2"} />
+            </Link>
+          ) : (
+            <></>
+          )}
           <img
             src={beerById?.Brewery?.logo}
             alt=""
@@ -94,8 +97,8 @@ export default function BeerData() {
           <div className="flex justify-between items-center">
             <h1 className="text-lg font-semibold py-4">{beerById?.name}</h1>
             <div className="flex flex-col items-center">
-              <LikeIcon className={"w-8"} />
-              <p className="text-sm">1,245</p>
+              {/* <LikeIcon className={"w-8"} />
+              <p className="text-sm">1,245</p> */}
             </div>
           </div>
           <div>
@@ -168,12 +171,12 @@ export default function BeerData() {
       <div>
         <div className="flex justify-between w-[60vw] mx-auto mt-5 items-center">
           <h1 className="text-xl font-semibold">ความเห็นผู้บริโภค</h1>
-          <button
+          { user ? (<button
             class="inline-block rounded-full border border-mainr px-8 py-2 text-sm font-medium text-mainr hover:bg-mainr hover:text-white focus:outline-none focus:ring active:bg-mainr"
             onClick={handleClickAdd}
           >
             แสดงความเห็น
-          </button>
+          </button>) : (<></>)}
         </div>
         <div>
           <div>

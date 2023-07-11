@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { addBrewery } from "../api/brewery-api";
+import { useNavigate } from "react-router-dom";
 
 export default function AddBrewery() {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     name: "",
     address: "",
@@ -41,6 +43,7 @@ export default function AddBrewery() {
     // formData.append("logo", file.logo);
     // formData.append("image", file.image);
     addBrewery(input);
+    navigate("/");
   };
 
   return (

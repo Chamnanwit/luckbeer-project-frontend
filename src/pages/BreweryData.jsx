@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import cover4 from "../assets/cover4.jpg";
-import ttbar from "../assets/ttbar.png";
-import brew from "../assets/brew.jpg";
 import { HomeIcon, PhoneIcon, SetIcon, WebIcon } from "../icons";
-import Beer from "../component/Beer";
 import { useAuth } from "../contexts/Auth-context";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function BreweryData({}) {
   const { breweryId } = useParams();
-  const { breweryById, fetchBreweryById } = useAuth();
+  const { breweryById, fetchBreweryById, user } = useAuth();
 
-  console.log("555555555555555", breweryId);
+  // console.log("-*-*---*-*-", user);
 
-  console.log("---------------- ------- -- - - -", breweryById);
+  // console.log("555555555555555", breweryId);
+
+  // console.log("---------------- ------- -- - - -", breweryById);
 
   useEffect(() => {
     fetchBreweryById(breweryId);
@@ -35,9 +34,20 @@ export default function BreweryData({}) {
 
       {/* body */}
       <div className="flex justify-around items-center w-[90vw] mx-auto pt-4">
-        <div className="flex flex-col">
-          <SetIcon className={"w-2"} />
-          <img src={breweryById?.logo} alt="" className="h-[10rem] w-[10rem] mx-auto" />
+        <div className="flex flex-col gap-6">
+          { user?.isAdmin ? (
+            <Link to="/addbrewery" >
+              <SetIcon className={"w-2"} />
+            </Link>
+          ) : (
+            <></>
+          )}
+
+          <img
+            src={breweryById?.logo}
+            alt=""
+            className="h-[10rem] w-[10rem] mx-auto"
+          />
           <h1 className="text-lg font-semibold py-4">{breweryById?.name}</h1>
           <div>
             <hr />
@@ -53,9 +63,7 @@ export default function BreweryData({}) {
             <hr />
             <div className="flex gap-5 items-center my-2">
               <WebIcon className={"h-8 fill-mainb"} />
-              <a href={breweryById?.linkWeb}>
-              {breweryById?.linkWeb}
-              </a>
+              <a href={breweryById?.linkWeb}>{breweryById?.linkWeb}</a>
             </div>
           </div>
         </div>
@@ -65,9 +73,7 @@ export default function BreweryData({}) {
       </div>
       <div className="w-[80vw] mx-auto mt-5">
         <h1 className="text-lg font-semibold">ข้อความจากผู้ผลิต</h1>
-        <p className="w-[90%] mt-4 mx-auto">
-        {breweryById?.text}
-        </p>
+        <p className="w-[90%] mt-4 mx-auto">{breweryById?.text}</p>
       </div>
       <div>
         {/* <div className="flex justify-around mx-4 mt-10">

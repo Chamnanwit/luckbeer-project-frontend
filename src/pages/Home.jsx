@@ -82,6 +82,7 @@ export default function Home() {
         <div className="px-10 flex justify-around">
           {brewery.map((el, id) => {
             return (
+              <Link to={`/brewery/${el.id}`}>
               <Brewery
                 key={id}
                 // logo={el?.Images[0]}
@@ -91,6 +92,7 @@ export default function Home() {
                 address={el.address}
                 getBreweryDataById={getBreweryDataById}
               />
+              </Link>
             );
           })}
         </div>
@@ -107,6 +109,7 @@ export default function Home() {
         </h1>
         <div className="flex justify-around">
           {beer.map((el, id) => {
+            if (id < 5) {
             return (
               <Link to={`/beer/${el.id}`}>
               <Beer
@@ -118,6 +121,7 @@ export default function Home() {
               />
               </Link>
             )
+            }
           })}
           
         </div>

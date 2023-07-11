@@ -56,6 +56,7 @@ export default function AuthContextProvider(props) {
       value={{
         user,
         setUser,
+        // fetchMe,
         logout,
         beer,
         fetchBeer,

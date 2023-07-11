@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { addBeer } from "../api/beer-api";
+import { useNavigate } from "react-router-dom";
 
 export default function AddBeer() {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     name: "",
     percentAlcohol: "",
@@ -43,6 +45,7 @@ export default function AddBeer() {
     formData.append("image3", file.image3);
     formData.append("image4", file.image4);
     addBeer(formData);
+    navigate("/");
   };
 
   return (

@@ -49,7 +49,7 @@ export default function BeerCard() {
 
       {/* card */}
       <div className="bg-gray-200">
-        <div className="flex justify-around mx-4 mt-8">
+        <div className="flex justify-around mx-4 mt-8 gap-10 flex-wrap">
         {beer.map((el, id) => {
             return (
               <Link to={`/beer/${el.id}`}>
