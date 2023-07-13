@@ -5,7 +5,7 @@ export const getAllBrewery = () => {
 };
 
 export const searchBrewery = (input) => {
-  return axios.get("/brewery/search", input);
+  return axios.get("/brewery/search", {params: input});
 };
 
 export const getBreweryById = (breweryId) => {

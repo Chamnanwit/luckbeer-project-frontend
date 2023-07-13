@@ -1,4 +1,4 @@
-import { deleteCommentByCommentIdByAdmin } from "../api/comment-api";
+import { deleteCommentByCommentIdByAdmin, deleteCommentByCommentIdByUser } from "../api/comment-api";
 import { DeleteIcon, SetIcon } from "../icons";
 import { useAuth } from "../contexts/Auth-context";
 
@@ -15,7 +15,10 @@ export default function Comment({
   // console.log("beerId", beerId)
   const hdlDelete = async () => {
     const shouldDelete = confirm("คุณต้องการลบหรือไม่");
-    if (shouldDelete) {
+    if ( shouldDelete && name === user?.name) {
+      await deleteCommentByCommentIdByUser(beerId, id);
+      fetchComment(beerId);
+    } else if (shouldDelete) {
       await deleteCommentByCommentIdByAdmin(beerId, id);
       fetchComment(beerId);
     }
@@ -26,7 +29,7 @@ export default function Comment({
       <div className="bg-gray-200 w-[70vw] mx-auto p-4 rounded-md mt-4">
         <div className="flex items-center gap-4">
           <h1 className="inline-block rounded-full bg-subg px-4 py-2 text-xl font-medium text-white">
-            { user.name[0] }
+            {name[0]}
           </h1>
           <h2 className="text-xl font-semibold">{name}</h2>
 
@@ -40,7 +43,14 @@ export default function Comment({
                   onClick={() => alert("ไม่ใช่ความเห็นคุณ")}
                 />
               )}
-              <DeleteIcon className={"w-3"} onClick={() => hdlDelete()} />
+              {name === user?.name || user?.isAdmin ? (
+                <DeleteIcon className={"w-3"} onClick={() => hdlDelete()} />
+              ) : (
+                <DeleteIcon
+                  className={"w-3"}
+                  onClick={() => alert("ไม่ใช่ความเห็นคุณ")}
+                />
+              )}
             </div>
           ) : (
             <></>

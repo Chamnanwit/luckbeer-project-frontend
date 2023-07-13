@@ -2,15 +2,14 @@ import cover4 from "../assets/cover3.jpg";
 import { SearchIcon } from "../icons";
 import Brewery from "../component/brewery";
 import { useEffect, useState } from "react";
-import { getAllBrewery } from "../api/brewery-api";
+import { getAllBrewery, searchBrewery } from "../api/brewery-api";
 import { Link } from "react-router-dom";
 
 export default function BeerCard() {
   const [input, setInput] = useState("");
   const [brewery, setBrewery] = useState([]);
 
-  // console.log("--------------brew-------------", brewery)
-
+  // console.log("--------------brew-------------", brewery);
 
   const fetchBrewery = async () => {
     const res = await getAllBrewery();
@@ -22,13 +21,15 @@ export default function BeerCard() {
   }, []);
 
   const hdlChangeInput = (e) => {
-    setInput({ [e.target.name]: e.target.value });
+      setInput({ [e.target.name]: e.target.value });
+      console.log(input);
   };
 
-  const hdlSubmit = (e) => {
+  const hdlSubmit = async (e) => {
     e.preventDefault();
-
-    // addBeer(input);
+    if (input == "") return;
+    const res = await searchBrewery(input);
+    setBrewery(res.data);
   };
 
   return (
@@ -63,17 +64,17 @@ export default function BeerCard() {
       {/* card */}
       <div>
         <div className="flex justify-around mx-4 mt-8 gap-10 flex-wrap">
-        {brewery.map((el, id) => {
+          {brewery.map((el, id) => {
             return (
               <Link to={`/brewery/${el.id}`}>
-              <Brewery
-                key={id}
-                logo={el?.Images}
-                name={el.name}
-                province={el.province}
-                phoneNumber={el.phoneNumber}
-                address={el.address}
-              />
+                <Brewery
+                  key={id}
+                  logo={el?.Images}
+                  name={el.name}
+                  province={el.province}
+                  phoneNumber={el.phoneNumber}
+                  address={el.address}
+                />
               </Link>
             );
           })}

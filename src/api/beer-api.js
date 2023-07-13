@@ -4,12 +4,10 @@ export const getAllBeer = () => {
   return axios.get("/beer/");
 };
 
-export const searchBrewery = (input) => {
-  return axios.get("/beer/search", input);
+export const searchBeer =  (input) => {
+  return axios.get("/beer/search", {params: {type:input}});
+  // return axios.get("/beer/search?type="+input);
 };
-
-
-
 
 export const getBeerById = (beerId) => {
   return axios.get(`/beer/${beerId}`);
@@ -22,10 +20,6 @@ export const getBeerById = (beerId) => {
 // export const getCommentById = (beerId) => {
 //   return axios.get(`/comment/${beerId}`)
 // }
-
-
-
-
 
 export const addBeer = (input) => {
   return axios.post("/beer/", input);
