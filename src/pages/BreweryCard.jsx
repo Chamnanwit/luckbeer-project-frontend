@@ -69,7 +69,7 @@ export default function BeerCard() {
               <Link to={`/brewery/${el.id}`}>
                 <Brewery
                   key={id}
-                  logo={el?.Images}
+                  logo={el.logo}
                   name={el.name}
                   province={el.province}
                   phoneNumber={el.phoneNumber}

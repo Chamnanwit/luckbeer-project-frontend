@@ -19,3 +19,7 @@ export const deleteCommentByCommentIdByUser = (beerId, commentId) => {
 export const getCommentBeer = (beerId) => {
   return axios.get(`/beer/${beerId}/comment`);
 };
+
+export const getCommentBeerByCommentId = (beerId, commentId) => {
+  return axios.get(`/beer/${beerId}/comment/${commentId}`);
+};

@@ -74,6 +74,7 @@ export default function BeerCard() {
               <Link to={`/beer/${el.id}`}>
                 <Beer
                   key={id}
+                  name={el.name}
                   percentAlcohol={el.percentAlcohol}
                   type={el.Type.type}
                   image={el.ImageBeer.image1}

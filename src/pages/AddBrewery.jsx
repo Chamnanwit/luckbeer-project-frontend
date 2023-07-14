@@ -15,17 +15,18 @@ export default function AddBrewery() {
     image: "",
   });
 
-  // const [file, setFile] = useState({
-  //   logo: "",
-  //   image: "",
-  // })
+  const [file, setFile] = useState({
+    logo: null,
+    image: null,
+  })
 
-  // const hdlChangeFile = (e) => {
-  //   if (e.target.files[0]) {
-  //     setFile({ ...file, [e.target.name]: e.target.files[0] });
-  //     console.log(file);
-  //   }
-  // };
+  const hdlChangeFile = (e) => {
+    console.log(e.target.files)
+    if (e.target.files[0]) {
+      setFile({ ...file, [e.target.name]: e.target.files[0] });
+      console.log(file);
+    }
+  };
 
   const hdlChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -33,16 +34,16 @@ export default function AddBrewery() {
 
   const hdlSubmit = (e) => {
     e.preventDefault();
-    // const formData = new FormData();
-    // formData.append("name", input.name);
-    // formData.append("address", input.address);
-    // formData.append("province", input.province);
-    // formData.append("phoneNumber", input.phoneNumber);
-    // formData.append("linkWeb", input.linkWeb);
-    // formData.append("text", input.ltext);
-    // formData.append("logo", file.logo);
-    // formData.append("image", file.image);
-    addBrewery(input);
+    const formData = new FormData();
+    formData.append("name", input.name);
+    formData.append("address", input.address);
+    formData.append("province", input.province);
+    formData.append("phoneNumber", input.phoneNumber);
+    formData.append("linkWeb", input.linkWeb);
+    formData.append("text", input.text);
+    formData.append("logo", file.logo);
+    formData.append("image", file.image);
+    addBrewery(formData);
     navigate("/");
   };
 
@@ -162,7 +163,7 @@ export default function AddBrewery() {
                 type="file"
                 name="logo"
                 id="logo"
-                onChange={hdlChangeInput}
+                onChange={hdlChangeFile}
                 className="h-[10vh] mt-1 w-full rounded-md border-gray-400 shadow-sm sm:text-sm py-2 pl-2"
               />
             </div>
@@ -178,7 +179,7 @@ export default function AddBrewery() {
                 type="file"
                 name="image"
                 id="image"
-                onChange={hdlChangeInput}
+                onChange={hdlChangeFile}
                 className="h-[10vh] mt-1 w-full rounded-md border-gray-400 shadow-sm sm:text-sm py-2 pl-2"
               />
             </div>

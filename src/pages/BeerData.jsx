@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import cover4 from "../assets/cover4.jpg";
-import { LikeIcon, SetIcon } from "../icons";
+import { DeleteIcon, SetIcon } from "../icons";
 import {
   addCommentBeer,
   getCommentBeer,
   updateCommentByCommentId,
+  getCommentBeerByCommentId,
 } from "../api/comment-api";
+import { deleteBeerById } from "../api/beer-api"
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/Auth-context";
 import Comment from "../component/Comment";
@@ -18,6 +20,13 @@ export default function BeerData() {
   const [boxComment, setBoxComment] = useState(false);
   const [commentId, setCommentId] = useState("");
   const [isEdit, setIsEdit] = useState(false);
+  // const [fetchCommentEdit, setFetchProductEdit] = useState("");
+
+  // const getCommentById = async (beerId, commentId) => {
+  //   const res1 = await getCommentBeerByCommentId(beerId, commentId);
+  //   console.log("-------res1--------", res1);
+  //   setFetchProductEdit(res1.data);
+  // };
 
   const fetchComment = async (beerId) => {
     const res = await getCommentBeer(beerId);
@@ -56,6 +65,8 @@ export default function BeerData() {
   };
 
   const hdlClickEdit = (commentId) => {
+    // getCommentById(beerId, commentId);
+    // setInput(fetchCommentEdit?.message);
     setIsEdit(true);
     setBoxComment(!boxComment);
     setCommentId(commentId);
@@ -64,6 +75,14 @@ export default function BeerData() {
   const handleSubmitEditComment = async () => {
     await updateCommentByCommentId(beerId, commentId, { message: input });
   };
+
+  const hdlClickDeleteBeer = async () => {
+    const shouldDelete = confirm("คุณต้องการลบหรือไม่");
+    if (!shouldDelete) return;
+    await deleteBeerById(beerId)
+    window.location.href = '/beer';
+    // return <Link to="/beer" />;
+  }
 
   return (
     <div>
@@ -84,11 +103,16 @@ export default function BeerData() {
         <div className="flex flex-col w-[35%] gap-6">
           {user?.isAdmin ? (
             <Link to="/addbeer">
-              <SetIcon className={"w-2"} />
+              <SetIcon className={"w-3"} />
             </Link>
           ) : (
             <></>
           )}
+          { user?.isAdmin ? (
+                <DeleteIcon className={"w-3"} onClick={() => hdlClickDeleteBeer()}/>
+              ) : (
+                <></>
+              )}
           <img
             src={beerById?.Brewery?.logo}
             alt=""
@@ -171,12 +195,16 @@ export default function BeerData() {
       <div>
         <div className="flex justify-between w-[60vw] mx-auto mt-5 items-center">
           <h1 className="text-xl font-semibold">ความเห็นผู้บริโภค</h1>
-          { user ? (<button
-            class="inline-block rounded-full border border-mainr px-8 py-2 text-sm font-medium text-mainr hover:bg-mainr hover:text-white focus:outline-none focus:ring active:bg-mainr"
-            onClick={handleClickAdd}
-          >
-            แสดงความเห็น
-          </button>) : (<></>)}
+          {user ? (
+            <button
+              class="inline-block rounded-full border border-mainr px-8 py-2 text-sm font-medium text-mainr hover:bg-mainr hover:text-white focus:outline-none focus:ring active:bg-mainr"
+              onClick={handleClickAdd}
+            >
+              แสดงความเห็น
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
         <div>
           <div>

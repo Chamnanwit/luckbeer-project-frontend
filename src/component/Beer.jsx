@@ -2,7 +2,7 @@ import { WebIcon, CommentIcon, LikeIcon } from "../icons";
 
 import cover1 from "../assets/cover1.jpg";
 
-export default function Beer({ percentAlcohol, type, image }) {
+export default function Beer({ percentAlcohol, type, image, name }) {
   return (
     <div>
         <div className="pt-10 pb-7">
@@ -11,7 +11,7 @@ export default function Beer({ percentAlcohol, type, image }) {
                 src={image}
                 className="rounded-full w-[7rem] h-[7rem] mt-[-3.5rem] outline outline-4 outline-white "
               />
-              <h1 className="text-xl font-bold">Outlaw stout</h1>
+              <h1 className="text-xl font-bold">{name}</h1>
               <a
                 class="rounded-full border border-mainr bg-mainr px-12 py-2 text-sm font-medium text-white hover:bg-transparent hover:text-mainr focus:outline-none focus:ring"
                 href="/"

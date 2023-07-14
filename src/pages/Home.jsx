@@ -15,20 +15,21 @@ export default function Home() {
   const [dataBeer, setDataBeer] = useState({});
   const [dataBrewery, setDataBrewery] = useState({});
 
+  console.log("555555555555555555", brewery);
+
   const getBreweryDataById = async (id) => {
-    const res = await getBreweryById(id)
-    setDataBrewery(res.data)
-  }
+    const res = await getBreweryById(id);
+    setDataBrewery(res.data);
+  };
 
   const getBeerDataById = async (id) => {
-    const res = await getBeerById(id)
-    setDataBeer(res.data)
-  }
-
+    const res = await getBeerById(id);
+    setDataBeer(res.data);
+  };
 
   const fetchBrewery = async () => {
     const res = await getAllBrewery();
-    console.log(res.data)
+    console.log(res.data);
     setBrewery(res.data);
   };
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function Home() {
 
   const fetchBeer = async () => {
     const res = await getAllBeer();
-    console.log(res.data)
+    console.log(res.data);
     setBeer(res.data);
   };
   useEffect(() => {
@@ -81,19 +82,21 @@ export default function Home() {
         </h1>
         <div className="px-10 flex justify-around">
           {brewery.map((el, id) => {
-            return (
-              <Link to={`/brewery/${el.id}`}>
-              <Brewery
-                key={id}
-                // logo={el?.Images[0]}
-                name={el.name}
-                province={el.province}
-                phoneNumber={el.phoneNumber}
-                address={el.address}
-                getBreweryDataById={getBreweryDataById}
-              />
-              </Link>
-            );
+            if (id < 4) {
+              return (
+                <Link to={`/brewery/${el.id}`}>
+                  <Brewery
+                    key={id}
+                    logo={el.logo}
+                    name={el.name}
+                    province={el.province}
+                    phoneNumber={el.phoneNumber}
+                    address={el.address}
+                    getBreweryDataById={getBreweryDataById}
+                  />
+                </Link>
+              );
+            }
           })}
         </div>
         <div className="flex justify-center">
@@ -110,20 +113,20 @@ export default function Home() {
         <div className="flex justify-around">
           {beer.map((el, id) => {
             if (id < 5) {
-            return (
-              <Link to={`/beer/${el.id}`}>
-              <Beer
-              key={id}
-              percentAlcohol={el.percentAlcohol}
-              type={el.Type.type}
-              image={el.ImageBeer.image1}
-              getBeerDataById={getBeerDataById}
-              />
-              </Link>
-            )
+              return (
+                <Link to={`/beer/${el.id}`}>
+                  <Beer
+                    key={id}
+                    name={el.name}
+                    percentAlcohol={el.percentAlcohol}
+                    type={el.Type.type}
+                    image={el.ImageBeer.image1}
+                    getBeerDataById={getBeerDataById}
+                  />
+                </Link>
+              );
             }
           })}
-          
         </div>
       </div>
     </>
